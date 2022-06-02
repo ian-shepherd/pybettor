@@ -44,9 +44,6 @@ def kelly(win_prob, odds, category: str = "us", kelly_factor: int = 1):
     bets = {"odds": odds, "win_prob": win_prob}
     kelly_perc = []
     for i in range(len(bets["odds"])):
-        print(f"Bet Number {i + 1}:")
-        print(bets["odds"][i], bets["win_prob"][i])
-
         kelly_perc_temp = round(
             ((bets["odds"][i] * bets["win_prob"][i]) - (1 - bets["win_prob"][i]))
             / bets["odds"][i],
@@ -57,15 +54,3 @@ def kelly(win_prob, odds, category: str = "us", kelly_factor: int = 1):
         kelly_perc.append(kelly_perc_temp)
 
     return kelly_perc
-
-
-# if __name__ == "__main__":
-#    print(kelly(0.55, -110))
-#    print(kelly(0.55, 110))
-#    print(kelly(0.55, 2.15, category="dec"))
-#    print(kelly(0.55, 0.50, category="prob"))
-#    print(kelly(0.55, 0.50, category="prob", kelly_factor=2))  # Half Kelly
-#    print(kelly(0.55, 0.50, category="prob", kelly_factor=4))  # Quarter Kelly
-#    print(kelly(0.55, 0.50, category="prob", kelly_factor=8))  # Eighth Kelly
-#    print("MULTIPLE BETS TEST")
-#    print(kelly([0.55, 0.55], [110, -110]))
