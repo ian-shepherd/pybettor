@@ -7,7 +7,7 @@ def kelly(win_prob, odds, category: str = "us", kelly_factor: int = 1):
     This function calculates the Kelly Criterion percentage of your
     bankroll to bet in order to maximize returns.
 
-    Reference: i[Kelly Criterion wikipedia](https://en.wikipedia.org/wiki/Kelly_criterion) page
+    Reference: Kelly Criterion wikipedia(https://en.wikipedia.org/wiki/Kelly_criterion) page
 
     Args:
         win_prob (float): Win Probability of bet
@@ -50,7 +50,6 @@ def kelly(win_prob, odds, category: str = "us", kelly_factor: int = 1):
             4,
         )
         kelly_perc_temp = round(kelly_perc_temp / kelly_factor, 4)
-        print(f"Kelly Percentage: {kelly_perc_temp}")
         kelly_perc.append(kelly_perc_temp)
 
     return kelly_perc
