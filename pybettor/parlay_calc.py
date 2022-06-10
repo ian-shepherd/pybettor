@@ -9,7 +9,7 @@ def parlay_calc(risk: float = 100.0, odds=[-110, -110], category: str = "us"):
 
     Args:
         risk (float): Risk of parlay bet
-        odds (list): odds of an event
+        odds (list): odds of each leg of the parlay bet
         category (str, optional): type of odds. Defaults to "us". \n
             'us', American Odds \n
             'dec', Decimal Odds \n
