@@ -14,7 +14,7 @@ def bet_calc(risk, odds, category: str = "us"):
             Defaults to "us".
 
     Returns:
-        int: Payout of a bet
+        List[float]: Payout of a bet
     """
 
     if type(risk) is not list:
