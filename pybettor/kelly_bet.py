@@ -6,8 +6,6 @@ def kelly_bet(unit_size, win_prob, odds, category: str = "us", kelly_factor: int
     """Kelly Criterion Bet Size
     This function calculates the Kelly Criterion and returns the dollar amount
     to bet in order to maximize returns.
-    This function calculates the Kelly Criterion percentage of your
-    bankroll to bet in order to maximize returns.
 
     Reference: Kelly Criterion wikipedia(https://en.wikipedia.org/wiki/Kelly_criterion) page
 
@@ -23,7 +21,7 @@ def kelly_bet(unit_size, win_prob, odds, category: str = "us", kelly_factor: int
             Defaults to 1.
 
     Returns:
-        int: Optimal bet size to risk on bet based on the kelly criterion and bankroll
+        List[int]: Optimal bet size to risk on bet based on the kelly criterion and bankroll
     """
 
     if type(win_prob) is not list:
@@ -32,7 +30,7 @@ def kelly_bet(unit_size, win_prob, odds, category: str = "us", kelly_factor: int
     if type(odds) is not list:
         odds = [odds]
 
-    assert isinstance(unit_size, (int, float)), "odds must be numeric"
+    assert isinstance(unit_size, (int, float)), "unit size must be numeric"
     assert all(isinstance(x, (int, float)) for x in odds), "odds must be numeric"
     assert all(1.0 >= x >= 0.0 for x in win_prob), "Win Prob must be between 0 and 1"
     assert category in [
