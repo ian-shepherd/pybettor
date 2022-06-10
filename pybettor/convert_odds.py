@@ -5,15 +5,19 @@ from implied_prob import implied_prob
 
 
 def convert_odds(odds, cat_in: str = "us", cat_out: str = "all"):
-    """_summary_
+    """Odds Converter
+    This function converts any odds or probability.
 
     Args:
-        odds (_type_): _description_
-        cat_in (str, optional): _description_. Defaults to "us".
-        cat_out (str, optional): _description_. Defaults to "all".
+        odds (float): Odds, or lines, for a given bet(s) (-115, -105)
+        cat_in (str, optional): 'us', 'dec', 'frac', 'prob'
+            Input Odds category.
+            Defaults to "us".
+        cat_out (str, optional): 'us', 'dec', 'frac', 'prob'
+            Output Odds category. Defaults to "all".
 
     Returns:
-        _type_: _description_
+        float or pd.DataFrame: Converted Odds
     """
 
     if type(odds) is not list:
