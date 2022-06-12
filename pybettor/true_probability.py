@@ -1,16 +1,17 @@
-from implied_prob import implied_prob
+from .implied_prob import implied_prob
 
 
 def true_probability(line: float, odds, category: str = "us"):
-    """_summary_
+    """Bet True Probability
+    This function calculates the true probability of a bet given the odds.
 
     Args:
-        line (float): _description_
-        odds (_type_): _description_
+        line (float): odds of bet side
+        odds (list): odds of all sides
         category (str, optional): _description_. Defaults to "us".
 
     Returns:
-        _type_: _description_
+        float: probability
     """
 
     assert all(isinstance(x, (int, float)) for x in odds), "odds must be numeric"

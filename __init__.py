@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
+__version__ = "1.0.0"
 
-from pybettor.implied_prob import implied_prob
-from pybettor.implied_odds import implied_odds
-from pybettor.convert_odds import convert_odds
+from .pybettor import *

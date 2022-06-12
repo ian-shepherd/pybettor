@@ -1,6 +1,5 @@
 import numpy as np
-
-from convert_odds import convert_odds
+from .convert_odds import convert_odds
 
 
 def parlay_calc(risk: float = 100.0, odds=[-110, -110], category: str = "us"):

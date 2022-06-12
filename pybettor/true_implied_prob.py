@@ -1,17 +1,18 @@
-from implied_prob import implied_prob
-from true_probability import true_probability
+from .implied_prob import implied_prob
+from .true_probability import true_probability
 import pandas as pd
 
 
 def true_implied_prob(line: float, odds, category: str = "us"):
-    """_summary_
+    """Bet Implied Probability
+    This function calculates the implied probability of a bet given the odds.
 
     Args:
-        odds (_type_): _description_
-        category (str, optional): _description_. Defaults to "us".
+        odds (float): _description_
+        category (str, optional): type of odds. Defaults to "us".
 
     Returns:
-        _type_: _description_
+        float: probability
     """
 
     assert isinstance(line, (int, float)), "line much be numeric"
@@ -29,4 +30,4 @@ def true_implied_prob(line: float, odds, category: str = "us"):
         list(zip([true_prob], imp_prob)), columns=["true_prob", "imp_prob"]
     )
 
-    return true_prob
+    return df

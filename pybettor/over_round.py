@@ -1,4 +1,4 @@
-from implied_prob import implied_prob
+from .implied_prob import implied_prob
 
 
 def over_round(lines, category: str = "us"):

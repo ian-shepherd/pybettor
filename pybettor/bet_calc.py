@@ -1,5 +1,5 @@
 from fractions import Fraction
-from convert_odds import convert_odds
+from .convert_odds import convert_odds
 
 
 def bet_calc(risk, odds, category: str = "us"):
@@ -39,7 +39,7 @@ def bet_calc(risk, odds, category: str = "us"):
     bets = {"odds": odds, "risk": risk}
     payout = []
     for i in range(len(bets["odds"])):
-        ## the magic
+        # the magic
         payout_temp = round(bets["risk"][i] * bets["odds"][i], 2)
         payout.append(payout_temp)
 

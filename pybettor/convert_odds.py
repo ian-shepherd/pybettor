@@ -1,7 +1,7 @@
 from fractions import Fraction
 import pandas as pd
-from implied_odds import implied_odds
-from implied_prob import implied_prob
+from .implied_odds import implied_odds
+from .implied_prob import implied_prob
 
 
 def convert_odds(odds, cat_in: str = "us", cat_out: str = "all"):

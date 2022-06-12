@@ -3,7 +3,8 @@ import pandas as pd
 
 
 def implied_odds(prob, category: str = "us"):
-    """Provides the fair odds for an event given the probability
+    """Bet Implied Odds
+    Provides the fair odds for an event given the probability.
 
     Args:
         prob (str or list): probability of an event

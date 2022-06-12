@@ -1,5 +1,5 @@
 from fractions import Fraction
-from convert_odds import convert_odds
+from .convert_odds import convert_odds
 
 
 def kelly_bet(unit_size, win_prob, odds, category: str = "us", kelly_factor: int = 1):

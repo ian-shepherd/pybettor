@@ -1,5 +1,6 @@
 def implied_prob(odds, category: str = "us"):
-    """Provides the implied probability for an event given the odds
+    """Bet Implied Probability
+    This function calculates the implied probability for an event given the odds.
 
     Args:
         odds (str or list): odds of an event
