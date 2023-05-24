@@ -2,7 +2,7 @@ from fractions import Fraction
 from .convert_odds import convert_odds
 
 
-def kelly(win_prob, odds, category: str = "us", kelly_factor: int = 1):
+def kelly(win_prob, odds, category: str = "us", kelly_factor: int = 1) -> float:
     """Kelly Criterion Calculation
     This function calculates the Kelly Criterion percentage of your
     bankroll to bet in order to maximize returns.
@@ -23,14 +23,8 @@ def kelly(win_prob, odds, category: str = "us", kelly_factor: int = 1):
         float: Optimal percentage of bankroll to risk on bet based on the kelly criterion
     """
 
-    if type(win_prob) is not list:
-        win_prob = [win_prob]
-
-    if type(odds) is not list:
-        odds = [odds]
-
-    assert all(isinstance(x, (int, float)) for x in odds), "odds must be numeric"
-    assert all(1.0 >= x >= 0.0 for x in win_prob), "Win Prob must be between 0 and 1"
+    assert isinstance(odds, (int, float)), "odds must be numeric"
+    assert win_prob < 1 and win_prob > 0, "Win Prob must be between 0 and 1"
     assert category in [
         "us",
         "frac",
@@ -38,18 +32,18 @@ def kelly(win_prob, odds, category: str = "us", kelly_factor: int = 1):
         "prob",
     ], "input category must be either: ('us', 'dec', 'frac', 'prob')"
 
-    odds = convert_odds(odds, cat_in=category, cat_out="frac")
+    odds = convert_odds(odds, cat_in=category, cat_out="frac")[0]
+    odds = float(Fraction(odds))
 
-    odds = [float(Fraction(x)) for x in odds]
     bets = {"odds": odds, "win_prob": win_prob}
-    kelly_perc = []
-    for i in range(len(bets["odds"])):
-        kelly_perc_temp = round(
-            ((bets["odds"][i] * bets["win_prob"][i]) - (1 - bets["win_prob"][i]))
-            / bets["odds"][i],
-            4,
+    kelly_perc = round(
+        (
+            ((bets["odds"] * bets["win_prob"]) - (1 - bets["win_prob"]))
+            / bets["odds"]
+            / kelly_factor
         )
-        kelly_perc_temp = round(kelly_perc_temp / kelly_factor, 4)
-        kelly_perc.append(kelly_perc_temp)
+        * 100,
+        2,
+    )
 
     return kelly_perc

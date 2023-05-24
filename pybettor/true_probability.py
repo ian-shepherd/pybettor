@@ -1,7 +1,7 @@
 from .implied_prob import implied_prob
 
 
-def true_probability(line: float, odds, category: str = "us"):
+def true_probability(line: float, odds, category: str = "us") -> float:
     """Bet True Probability
     This function calculates the true probability of a bet given the odds.
 

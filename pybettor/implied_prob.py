@@ -1,4 +1,4 @@
-def implied_prob(odds, category: str = "us"):
+def implied_prob(odds, category: str = "us") -> list:
     """Bet Implied Probability
     This function calculates the implied probability for an event given the odds.
 
@@ -24,7 +24,6 @@ def implied_prob(odds, category: str = "us"):
     ], "category must be either: ('us', 'dec', 'frac')"
 
     if category == "us":
-
         assert all(isinstance(x, int) for x in odds), "us odds must be a whole number"
         assert not any(
             x in range(-99, 100) for x in odds
@@ -33,13 +32,11 @@ def implied_prob(odds, category: str = "us"):
         imp_prob = [1 / (1 - 100 / x) if x <= -100 else 1 / (1 + x / 100) for x in odds]
 
     elif category == "dec":
-
         assert all(x >= 1 for x in odds), "dec odds must be greater than 1"
 
         imp_prob = [1 / x for x in odds]
 
     elif category == "frac":
-
         assert all(x > 0 for x in odds), "frac odds must be greater than 0"
 
         imp_prob = [1 / (1 + x) for x in odds]

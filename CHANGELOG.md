@@ -1,5 +1,24 @@
 # Change Log
 
+### 1.1.0 2023-05-24 Added new functions and updated documentation and output of functions
+* Functions added
+    * bet_prob() calculates probability of bet
+    * break_even() calculates win rate needed to break even
+    * fair_odds() calculates fair odds of bet
+
+* Functions changed
+    * bet_calc() added type castings to ensure correct output and changed output from list to float
+    * convert_odds() added type casting and changed output from float or dataframe to list or dictionary
+    * implied_odds() added type casting and changed output from list or dataframe to list or dictionary
+    * implied_prob() added type casting
+    * kelly_bet() added type casting and changed output from list to int
+    * kelly() added type casting and changed output from list to int
+    * over_round() added type casting and correct documentation for return type
+    * parlay_calc() added type casting
+    * true_implied_prob() added type casting and changed output from dataframe to dictionary
+    * true_probability() added type casting
+
+
 ### 1.0.0 2022-06-12 Added new functions
 Functions added
 * bet_calc() calculated bet payout

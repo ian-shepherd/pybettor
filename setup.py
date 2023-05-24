@@ -1,6 +1,6 @@
 import setuptools
 
-VERSION = "1.0.0"
+VERSION = "1.1.0"
 DESCRIPTION = "automates simple bettor tasks"
 
 with open("README.md", "r") as fh:
@@ -15,7 +15,7 @@ setuptools.setup(
     url="https://github.com/ian-shepherd/pybettor",
     author="Ian Shepherd, Jason Lee, Jared Lee",
     author_email="ian.shepherd123@gmail.com, jason@aisportsfirm.com, 13jaredlee@gmail.com",
-    install_requires=["pandas"],
+    install_requires=["numpy", "scipy", "matplotlib"],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",

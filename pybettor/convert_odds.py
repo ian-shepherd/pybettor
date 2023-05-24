@@ -1,23 +1,27 @@
 from fractions import Fraction
-import pandas as pd
 from .implied_odds import implied_odds
 from .implied_prob import implied_prob
 
 
-def convert_odds(odds, cat_in: str = "us", cat_out: str = "all"):
+def convert_odds(odds, cat_in: str = "us", cat_out: str = "all") -> list or dict:
     """Odds Converter
     This function converts any odds or probability.
 
     Args:
         odds (float): Odds, or lines, for a given bet(s) (-115, -105)
-        cat_in (str, optional): 'us', 'dec', 'frac', 'prob'
-            Input Odds category.
-            Defaults to "us".
-        cat_out (str, optional): 'us', 'dec', 'frac', 'prob'
-            Output Odds category. Defaults to "all".
+        cat_in (str, optional): type of odds. Defaults to "us". \n
+            'us', American Odds \n
+            'dec', Decimal Odds \n
+            'frac', Fractional Odds \n
+            'prob', Implied Probability
+        cat_out (str, optional): type of odds. Defaults to "all". \n
+            'us', American Odds \n
+            'dec', Decimal Odds \n
+            'frac', Fractional Odds \n
+            'prob', Implied Probability
 
     Returns:
-        float or pd.DataFrame: Converted Odds
+        list or dictionary: Converted Odds
     """
 
     if type(odds) is not list:
@@ -40,7 +44,6 @@ def convert_odds(odds, cat_in: str = "us", cat_out: str = "all"):
     assert cat_in != cat_out, "input and output categories must be different"
 
     if cat_in == "us":
-
         assert all(isinstance(x, int) for x in odds), "us odds must be a whole number"
         assert not any(
             x in range(-99, 100) for x in odds
@@ -54,14 +57,12 @@ def convert_odds(odds, cat_in: str = "us", cat_out: str = "all"):
             frac = [Fraction(x).limit_denominator(100) for x in frac]
             frac = [str(x.numerator) + "/" + str(x.denominator) for x in frac]
             prob = implied_prob(odds, category="us")
-            new_odds = pd.DataFrame(
-                {
-                    "American": us,
-                    "Decimal": dec,
-                    "Fraction": frac,
-                    "Implied Probability": prob,
-                }
-            )
+            new_odds = {
+                "American": us,
+                "Decimal": dec,
+                "Fraction": frac,
+                "Implied Probability": prob,
+            }
 
         elif cat_out == "dec":
             new_odds = [-100 / x + 1 if x <= -100 else x / 100 + 1 for x in odds]
@@ -76,7 +77,6 @@ def convert_odds(odds, cat_in: str = "us", cat_out: str = "all"):
             new_odds = implied_prob(odds, category="us")
 
     elif cat_in == "dec":
-
         assert all(x >= 1 for x in odds), "dec odds must be greater than 1"
 
         if cat_out == "all":
@@ -86,14 +86,12 @@ def convert_odds(odds, cat_in: str = "us", cat_out: str = "all"):
             frac = [Fraction(x - 1).limit_denominator(100) for x in odds]
             frac = [str(x.numerator) + "/" + str(x.denominator) for x in frac]
             prob = implied_prob(odds, category="dec")
-            new_odds = pd.DataFrame(
-                {
-                    "American": us,
-                    "Decimal": dec,
-                    "Fraction": frac,
-                    "Implied Probability": prob,
-                }
-            )
+            new_odds = {
+                "American": us,
+                "Decimal": dec,
+                "Fraction": frac,
+                "Implied Probability": prob,
+            }
 
         elif cat_out == "us":
             new_odds = [(x - 1) * 100 if x >= 2 else -100 / (x - 1) for x in odds]
@@ -107,7 +105,6 @@ def convert_odds(odds, cat_in: str = "us", cat_out: str = "all"):
             new_odds = implied_prob(odds, category="dec")
 
     elif cat_in == "frac":
-
         assert all(x > 0 for x in odds), "frac odds must be greater than 0"
 
         new_odds = 1
@@ -118,14 +115,12 @@ def convert_odds(odds, cat_in: str = "us", cat_out: str = "all"):
             frac = [Fraction(x).limit_denominator(100) for x in odds]
             frac = [str(x.numerator) + "/" + str(x.denominator) for x in frac]
             prob = implied_prob(odds, category="frac")
-            new_odds = pd.DataFrame(
-                {
-                    "American": us,
-                    "Decimal": dec,
-                    "Fraction": frac,
-                    "Implied Probability": prob,
-                }
-            )
+            new_odds = {
+                "American": us,
+                "Decimal": dec,
+                "Fraction": frac,
+                "Implied Probability": prob,
+            }
 
         elif cat_out == "us":
             new_odds = [x * 100 if x >= 1 else -100 / x for x in odds]
@@ -138,20 +133,17 @@ def convert_odds(odds, cat_in: str = "us", cat_out: str = "all"):
             new_odds = implied_prob(odds, category="frac")
 
     elif cat_in == "prob":
-
         if cat_out == "all":
             us = implied_odds(odds, category="us")
             dec = implied_odds(odds, category="dec")
             frac = implied_odds(odds, category="frac")
             prob = odds
-            new_odds = pd.DataFrame(
-                {
-                    "American": us,
-                    "Decimal": dec,
-                    "Fraction": frac,
-                    "Implied Probability": prob,
-                }
-            )
+            new_odds = {
+                "American": us,
+                "Decimal": dec,
+                "Fraction": frac,
+                "Implied Probability": prob,
+            }
 
         elif cat_out == "us":
             new_odds = implied_odds(odds, category="us")

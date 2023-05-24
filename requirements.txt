@@ -1,4 +1,3 @@
-pandas
 numpy
-black
-flake8
+scipy
+matplotlib

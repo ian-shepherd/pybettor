@@ -1,7 +1,7 @@
 from .implied_prob import implied_prob
 
 
-def over_round(lines, category: str = "us"):
+def over_round(lines, category: str = "us") -> float:
     """Sportsbook's Over Round Percentage
     This function calculates the extra implied probability
     from each line of the bet, known as the House Edge or Over Round.
@@ -13,7 +13,7 @@ def over_round(lines, category: str = "us"):
             Defaults to "us"
 
     Returns:
-        List[float]: Bet's Over Round percent
+        float: Bet's Over Round percent
     """
 
     if type(lines) is not list:

@@ -1,21 +1,20 @@
 from fractions import Fraction
-import pandas as pd
 
 
-def implied_odds(prob, category: str = "us"):
+def implied_odds(prob, category: str = "us") -> list or dict:
     """Bet Implied Odds
     Provides the fair odds for an event given the probability.
 
     Args:
-        prob (str or list): probability of an event
+        prob (float): probability of an event
         category (str, optional): fair odds for a probability. Defaults to "us". \n
-            'all', All types\n
-            'us', American Odds\n
-            'dec', Decimal Odds\n
+            'all', All types \n
+            'us', American Odds \n
+            'dec', Decimal Odds \n
             'frac', Fractional Odds
 
     Returns:
-        list or dataframe: fair odds of a given event. Only returns a dataframe when category = 'all'
+        list or dictionary: fair odds of a given event. Only returns a dictionary when category = 'all'
     """
 
     if type(prob) is not list:
@@ -31,20 +30,17 @@ def implied_odds(prob, category: str = "us"):
     ], "category must be either: ('us', 'dec', 'frac', 'all')"
 
     if category == "all":
-
         us = [x / (1 - x) * -100 if x > 0.5 else (1 - x) / x * 100 for x in prob]
         dec = [round(1 / x, 2) for x in prob]
         frac = [Fraction(x - 1).limit_denominator(100) for x in dec]
         frac = [str(x.numerator) + "/" + str(x.denominator) for x in frac]
         prob = prob
-        imp_odds = pd.DataFrame(
-            {
-                "American": us,
-                "Decimal": dec,
-                "Fraction": frac,
-                "Implied Probability": prob,
-            }
-        )
+        imp_odds = {
+            "American": us,
+            "Decimal": dec,
+            "Fraction": frac,
+            "Implied Probability": prob,
+        }
 
     elif category == "us":
         imp_odds = [x / (1 - x) * -100 if x > 0.5 else (1 - x) / x * 100 for x in prob]
