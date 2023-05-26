@@ -1,5 +1,5 @@
 import numpy.testing as npt
-from pybettor import bet_calc
+from pybettor.bet_calc import bet_calc
 
 
 def test_bet_calc():
