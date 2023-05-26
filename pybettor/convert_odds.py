@@ -3,7 +3,31 @@ from .implied_odds import implied_odds
 from .implied_prob import implied_prob
 
 
-def convert_odds(odds, cat_in: str = "us", cat_out: str = "all") -> list or dict:
+def _convert_us_odds(odds):
+    return [-100 / x + 1 if x <= -100 else x / 100 + 1 for x in odds]
+
+
+def _convert_us_to_frac(odds):
+    return [str(Fraction(-100 / x if x <= -100 else x / 100).limit_denominator(100)) for x in odds]
+
+
+def _convert_dec_odds(odds):
+    return [(x - 1) * 100 if x >= 2 else -100 / (x - 1) for x in odds]
+
+
+def _convert_dec_to_frac(odds):
+    return [str(Fraction(x - 1).limit_denominator(100)) for x in odds]
+
+
+def _convert_frac_odds(odds):
+    return [x * 100 if x >= 1 else -100 / x for x in odds]
+
+
+def _convert_frac_to_dec(odds):
+    return [x + 1 for x in odds]
+
+
+def convert_odds(odds, cat_in='us', cat_out='all'):
     """
     Odds Converter
     This function converts any odds or probability.
@@ -16,121 +40,62 @@ def convert_odds(odds, cat_in: str = "us", cat_out: str = "all") -> list or dict
     Returns:
         list or dictionary: Converted Odds
     """
-    categories = ["us", "dec", "frac", "prob"]
+    categories = ['us', 'dec', 'frac', 'prob']
 
     assert type(odds) is list or isinstance(
-        odds, (int, float)), "odds must be numeric"
+        odds, (int, float)), 'odds must be numeric'
     assert cat_in in categories, "input category must be one of ('us', 'dec', 'frac', 'prob')"
     assert cat_out in categories + \
-        ["all"], "output category must be one of ('all', 'us', 'dec', 'frac', 'prob')"
+        ['all'], "output category must be one of ('all', 'us', 'dec', 'frac', 'prob')"
     assert cat_in != cat_out, "input and output categories must be different"
 
     if not isinstance(odds, list):
         odds = [odds]
 
-    if cat_in == "us":
+    new_odds = {}
+
+    if cat_in == 'us':
         assert all(isinstance(x, int)
-                   for x in odds), "us odds must be whole numbers"
+                   for x in odds), 'us odds must be whole numbers'
         assert not any(x in range(-99, 100)
-                       for x in odds), "us odds cannot be between -99 and 99"
+                       for x in odds), 'us odds cannot be between -99 and 99'
 
-        if cat_out == "all":
-            us = odds
-            dec = [round(-100 / x + 1 if x <= -100 else x / 100 + 1, 2)
-                   for x in odds]
-            frac = [str(Fraction(-100 / x if x <= -100 else x /
-                        100).limit_denominator(100)) for x in odds]
-            prob = implied_prob(odds, category="us")
-            new_odds = {
-                "American": us,
-                "Decimal": dec,
-                "Fraction": frac,
-                "Implied Probability": prob,
-            }
+        if cat_out in ('all', 'dec'):
+            new_odds['Decimal'] = _convert_us_odds(odds)
+        if cat_out in ('all', 'frac'):
+            new_odds['Fraction'] = _convert_us_to_frac(odds)
+        if cat_out in ('all', 'prob'):
+            new_odds['Implied Probability'] = implied_prob(odds, category='us')
 
-        elif cat_out == "dec":
-            new_odds = [round(-100 / x + 1 if x <= -
-                              100 else x / 100 + 1, 2) for x in odds]
-
-        elif cat_out == "frac":
-            new_odds = [str(Fraction(-100 / x if x <= -100 else x /
-                            100).limit_denominator(100)) for x in odds]
-
-        elif cat_out == "prob":
-            new_odds = implied_prob(odds, category="us")
-
-    elif cat_in == "dec":
+    elif cat_in == 'dec':
         assert all(
-            x >= 1 for x in odds), "dec odds must be greater than or equal to 1"
+            x >= 1 for x in odds), 'dec odds must be greater than or equal to 1'
 
-        if cat_out == "all":
-            us = [round((x - 1) * 100 if x >= 2 else -100 / (x - 1))
-                  for x in odds]
-            dec = odds
-            frac = [str(Fraction(x - 1).limit_denominator(100)) for x in odds]
-            prob = implied_prob(odds, category="dec")
-            new_odds = {
-                "American": us,
-                "Decimal": dec,
-                "Fraction": frac,
-                "Implied Probability": prob,
-            }
+        if cat_out in ('all', 'us'):
+            new_odds['American'] = _convert_dec_odds(odds)
+        if cat_out in ('all', 'frac'):
+            new_odds['Fraction'] = _convert_dec_to_frac(odds)
+        if cat_out in ('all', 'prob'):
+            new_odds['Implied Probability'] = implied_prob(
+                odds, category='dec')
 
-        elif cat_out == "us":
-            new_odds = [round((x - 1) * 100 if x >= 2 else -
-                              100 / (x - 1)) for x in odds]
+    elif cat_in == 'frac':
+        assert all(x > 0 for x in odds), 'frac odds must be greater than 0'
 
-        elif cat_out == "frac":
-            new_odds = [str(Fraction(x - 1).limit_denominator(100))
-                        for x in odds]
+        if cat_out in ('all', 'us'):
+            new_odds['American'] = _convert_frac_odds(odds)
+        if cat_out in ('all', 'dec'):
+            new_odds['Decimal'] = _convert_frac_to_dec(odds)
+        if cat_out in ('all', 'prob'):
+            new_odds['Implied Probability'] = implied_prob(
+                odds, category='frac')
 
-        elif cat_out == "prob":
-            new_odds = implied_prob(odds, category="dec")
-
-    elif cat_in == "frac":
-        assert all(x > 0 for x in odds), "frac odds must be greater than 0"
-
-        if cat_out == "all":
-            us = [round(x * 100 if x >= 1 else -100 / x) for x in odds]
-            dec = [round(x + 1, 2) for x in odds]
-            frac = [str(Fraction(x).limit_denominator(100)) for x in odds]
-            prob = implied_prob(odds, category="frac")
-            new_odds = {
-                "American": us,
-                "Decimal": dec,
-                "Fraction": frac,
-                "Implied Probability": prob,
-            }
-
-        elif cat_out == "us":
-            new_odds = [round(x * 100 if x >= 1 else -100 / x) for x in odds]
-
-        elif cat_out == "dec":
-            new_odds = [round(x + 1, 2) for x in odds]
-
-        elif cat_out == "prob":
-            new_odds = implied_prob(odds, category="frac")
-
-    elif cat_in == "prob":
-        if cat_out == "all":
-            us = implied_odds(odds, category="us")
-            dec = implied_odds(odds, category="dec")
-            frac = implied_odds(odds, category="frac")
-            prob = odds
-            new_odds = {
-                "American": us,
-                "Decimal": dec,
-                "Fraction": frac,
-                "Implied Probability": prob,
-            }
-
-        elif cat_out == "us":
-            new_odds = implied_odds(odds, category="us")
-
-        elif cat_out == "dec":
-            new_odds = implied_odds(odds, category="dec")
-
-        elif cat_out == "frac":
-            new_odds = implied_odds(odds, category="frac")
+    elif cat_in == 'prob':
+        if cat_out in ('all', 'us'):
+            new_odds['American'] = implied_odds(odds, category='us')
+        if cat_out in ('all', 'dec'):
+            new_odds['Decimal'] = implied_odds(odds, category='dec')
+        if cat_out in ('all', 'frac'):
+            new_odds['Fraction'] = implied_odds(odds, category='frac')
 
     return new_odds

@@ -7,7 +7,7 @@ def bet_prob(
     pred_spread: float, spread: float, sport: str = "NBA", plot=False
 ) -> dict or tuple:
     """Calculates the probability of winning, losing, and pushing a bet based on the predicted spread and actual spread.
-    The function also plots the normal distribution curve and the area under the curve for the left and right sides of the spread if plot=True.
+    Plots normal distribution curve and area under curve for spread sides if plot=True
     Standard deviations are as follows:
         NBA: 12
         NCAAB: 10
