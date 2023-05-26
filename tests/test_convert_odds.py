@@ -1,4 +1,3 @@
-import numpy as np
 import numpy.testing as npt
 
 from pybettor.convert_odds import convert_odds
