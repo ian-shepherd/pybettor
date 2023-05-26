@@ -8,7 +8,7 @@ def bet_prob(
 ) -> dict or tuple:
     """
     Calculates the probability of winning, losing, and pushing a bet based on the predicted spread and actual spread.
-    The function also plots the normal distribution curve and the area under the curve for the left and right sides of the spread if plot=True.
+    Plotting normal distribution curve and area under curve for spread sides if plot=True
     Standard deviations are as follows:
         NBA: 12
         NCAAB: 10
@@ -24,7 +24,7 @@ def bet_prob(
         {https://www-jstor-org.turing.library.northwestern.edu/stable/2684286}
 
         Winston, Wayne L. "From Point Ratings to Probabilities."
-        In Mathletics: How Gamblers, Managers, and Sports Enthusiasts Use Mathematics in Baseball, Basketball, and Football, 290-97.
+        Mathletics, pp. 290-97
         PRINCETON; OXFORD: Princeton University Press, 2009. Accessed July 18, 2020. doi:10.2307/j.ctt7sj9q.48.
 
     Args:
