@@ -1,4 +1,3 @@
-from fractions import Fraction
 from .convert_odds import convert_odds
 
 

@@ -97,7 +97,8 @@ def bet_prob(
 
         # Plot the vertical lines
         ax.axvline(spread, color="black", linestyle="--", label="Spread")
-        ax.axvline(pred_spread, color="black", linestyle="--", label="Prediction")
+        ax.axvline(pred_spread, color="black",
+                   linestyle="--", label="Prediction")
 
         # Add the annotation
         annotation_text = f"Point Edge: {spread - pred_spread}\nWin Probability: {round(win_prob * 100,2)}%\nLose Probability: {round(lose_prob * 100,2)}%\nPush Probability: {round(push_prob * 100,2)}%"
