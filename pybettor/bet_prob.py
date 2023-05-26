@@ -22,7 +22,7 @@ def bet_prob(
         Accessed July 18, 2020. doi:10.2307/2684286.
         {https://www-jstor-org.turing.library.northwestern.edu/stable/2684286}
 
-        Winston, Wayne L. "From Point Ratings to Probabilities." 
+        Winston, Wayne L. "From Point Ratings to Probabilities."
         In Mathletics: How Gamblers, Managers, and Sports Enthusiasts
             Use Mathematics in Baseball, Basketball, and Football, 290-97.
         PRINCETON; OXFORD: Princeton University Press, 2009. Accessed July 18, 2020. doi:10.2307/j.ctt7sj9q.48.
