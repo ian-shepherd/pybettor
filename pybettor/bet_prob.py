@@ -71,6 +71,7 @@ def bet_prob(
     }
 
     if plot:
+        # edge = abs(spread - pred_spread)
 
         # Create the figure and axes
         fig, ax = plt.subplots()
