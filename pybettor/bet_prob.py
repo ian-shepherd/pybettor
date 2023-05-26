@@ -46,14 +46,13 @@ def bet_prob(
         "NCAAF",
     ], "sport must be either: ('NBA', 'NCAAB', 'NFL', 'NCAAF')"
 
-    if sport == "NBA":
-        sd = 12
-    elif sport == "NCAAB":
-        sd = 10
-    elif sport == "NFL":
-        sd = 13.86
-    elif sport == "NCAAF":
-        sd = 16
+    standard_deviation_dic = {
+        "NBA": 12,
+        "NCAAB": 10,
+        "NFL": 13.86,
+        "NCAAF": 16
+    }
+    sd = standard_deviation_dic[sport]
 
     if spread % 1 == 0:
         win_prob = 1 - stats.norm.cdf(pred_spread + 0.5, loc=spread, scale=sd)
