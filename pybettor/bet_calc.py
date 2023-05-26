@@ -19,6 +19,7 @@ def bet_calc(risk: int or float, odds: int or float, category: str = "us") -> fl
     """
 
     assert isinstance(risk, (int, float)), "risk must be numeric"
+    # TODO allow fractions
     assert isinstance(odds, (int, float)), "odds must be numeric"
     assert category in [
         "us",
