@@ -7,8 +7,8 @@ def implied_odds(prob, category: str = "us") -> list or dict:
 
     Args:
         prob (float): probability of an event
-        category (str, optional): fair odds for a probability. Defaults to "us". \n
-            'all', All types \n
+        category (str, optional): type of odds. Defaults to "us". \n
+            'all', returns all odds \n
             'us', American Odds \n
             'dec', Decimal Odds \n
             'frac', Fractional Odds

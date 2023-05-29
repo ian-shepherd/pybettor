@@ -10,7 +10,7 @@ def fair_odds(
     Args:
         line (int or loat, optional): line of bet. Defaults to -110.
         odds (list, optional): odds of all sides. Defaults to [-110, -110].
-        : type of odds. Defaults to "us". \n
+        category (str): type of odds. Defaults to "us". \n
             'us', American Odds \n
             'dec', Decimal Odds \n
             'frac', Fractional Odds

@@ -1,5 +1,10 @@
 # Change Log
 
+### 1.1.1 2023-05-29 Added unit tests and fixed bugs
+* Added unit tests for all functions
+* Reduced complexity of convert_odds()
+
+
 ### 1.1.0 2023-05-24 Added new functions and updated documentation and output of functions
 * Functions added
     * bet_prob() calculates probability of bet

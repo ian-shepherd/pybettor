@@ -8,9 +8,12 @@ def over_round(lines, category: str = "us") -> float:
 
     Args:
         lines List[float]: Win Probability of bet [-115, -105]
-        category (str, optional): 'us', 'dec', 'frac', 'prob'
-            Odds category.
-            Defaults to "us"
+        category (str, optional): type of odds. Defaults to "us". \n
+            'us', American Odds \n
+            'dec', Decimal Odds \n
+            'frac', Fractional Odds \ n
+            'prob', Implied Probability
+
 
     Returns:
         float: Bet's Over Round percent

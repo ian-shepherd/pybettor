@@ -12,9 +12,11 @@ def kelly(win_prob, odds, category: str = "us", kelly_factor: int = 1) -> float:
     Args:
         win_prob (float): Win Probability of bet
         odds (float): Odds or Implied Win Probability for the bet
-        category (str, optional): 'us', 'dec', 'frac', 'prob'
-            Odds category.
-            Defaults to "us".
+        category (str, optional): type of odds. Defaults to "us". \n
+            'us', American Odds \n
+            'dec', Decimal Odds \n
+            'frac', Fractional Odds \n
+            'prob', Implied Probability
         kelly_factor (int, optional): Kelly Factor is used to shrink the kelly bet size.
             Half kelly (2), Quarter Kelly (4) are common in the sports betting world.
             Defaults to 1.
@@ -41,8 +43,7 @@ def kelly(win_prob, odds, category: str = "us", kelly_factor: int = 1) -> float:
             ((bets["odds"] * bets["win_prob"]) - (1 - bets["win_prob"]))
             / bets["odds"]
             / kelly_factor
-        )
-        * 100,
+        ),
         2,
     )
 
