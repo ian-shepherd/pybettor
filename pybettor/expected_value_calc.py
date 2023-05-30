@@ -6,7 +6,7 @@ def expected_value_calc(implied_probability: float, odds: float, category: str =
     This function returns the expected value of given odds, based on the implied probability.
 
     Args:
-        win_prob (float): Win Probability of bet
+        implied_probability (float): Win Probability of bet
         odds (float): Odds or Implied Win Probability for the bet
         category (str, optional): type of odds. Defaults to "us". \n
             'us', American Odds \n
