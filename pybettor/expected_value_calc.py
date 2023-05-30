@@ -3,7 +3,7 @@ from .convert_odds import convert_odds
 
 def expected_value_calc(implied_probability: float, odds: float, category: str = "us") -> float:
     """Expected value calculator
-    This function returns the expected value of given odds, based on the implied probability.
+    Given implied_probability and odds, return the expected value.
 
     Args:
         implied_probability (float): Win Probability of bet
