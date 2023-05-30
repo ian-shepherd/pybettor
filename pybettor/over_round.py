@@ -11,7 +11,7 @@ def over_round(lines, category: str = "us") -> float:
         category (str, optional): type of odds. Defaults to "us". \n
             'us', American Odds \n
             'dec', Decimal Odds \n
-            'frac', Fractional Odds \ n
+            'frac', Fractional Odds \n
             'prob', Implied Probability
 
 
@@ -22,7 +22,8 @@ def over_round(lines, category: str = "us") -> float:
     if type(lines) is not list:
         lines = [lines]
 
-    assert all(isinstance(x, (int, float)) for x in lines), "odds must be numeric"
+    assert all(isinstance(x, (int, float))
+               for x in lines), "odds must be numeric"
     assert category in [
         "us",
         "frac",
