@@ -15,6 +15,18 @@ You can install pybettor from [PyPi](https://pypi.org/project/pybettor/) with:
 pip install "pybettor"
 ```
 
+## Running Tests
+```python
+pip install pytest
+pytest
+```
+
+## Running Linting
+```python
+pip install flake8
+flake8 . --count --max-complexity=15 --max-line-length=128 --statistics
+```
+
 ## Examples
 
 #### Implied Probability
