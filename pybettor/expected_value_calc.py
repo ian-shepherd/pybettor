@@ -14,7 +14,7 @@ def expected_value_calc(implied_probability: float, odds: float, category: str =
             'frac', Fractional Odds
 
     Returns:
-        The expected value of the odds.
+        The expected value of the odds vs the implied_probability.
     """
 
     assert implied_probability >= 0, "implied probability must be in the range of 0 to 1 inclusive"
