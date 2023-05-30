@@ -7,8 +7,11 @@ def true_implied_prob(line: float, odds, category: str = "us") -> dict:
     This function calculates the implied probability of a bet given the odds.
 
     Args:
-        odds (float): _description_
-        category (str, optional): type of odds. Defaults to "us".
+        odds (float): odds of a bet
+        category (str, optional): type of odds. Defaults to "us". \n
+            'us', American Odds \n
+            'dec', Decimal Odds \n
+            'frac', Fractional Odds
 
     Returns:
         dict: true_prob, imp_prob

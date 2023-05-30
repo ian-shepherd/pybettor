@@ -8,7 +8,10 @@ def true_probability(line: float, odds, category: str = "us") -> float:
     Args:
         line (float): odds of bet side
         odds (list): odds of all sides
-        category (str, optional): _description_. Defaults to "us".
+        category (str, optional): type of odds. Defaults to "us". \n
+            'us', American Odds \n
+            'dec', Decimal Odds \n
+            'frac', Fractional Odds
 
     Returns:
         float: probability
