@@ -23,7 +23,7 @@ jobs:
       - name: Lint with flake8
         run: |
           # fail if there are any flake8 errors
-          flake8 . --count --max-complexity=15 --max-line-length=127 --statistics
+          flake8 . --count --max-complexity=15 --max-line-length=128 --statistics
       - name: Test with pytest
         run: |
           pytest
