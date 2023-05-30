@@ -8,7 +8,7 @@ class TestParlayCalc(unittest.TestCase):
         risk = 75
         odds = [-110, -110, -110]
         category = "us"
-        npt.assert_almost_equal(parlay_calc(risk, odds, category), 447.59)
+        npt.assert_almost_equal(parlay_calc(risk, odds, category), 446.85)
 
 
 if __name__ == "__main__":

@@ -10,7 +10,7 @@ def kelly(win_prob, odds, category: str = "us", kelly_factor: int = 1) -> float:
     Reference: Kelly Criterion wikipedia(https://en.wikipedia.org/wiki/Kelly_criterion) page
 
     Args:
-        win_prob (float): Win Probability of bet with a range of 0 to 1
+        win_prob (float): Win Probability of bet
         odds (float): Odds or Implied Win Probability for the bet
         category (str, optional): type of odds. Defaults to "us". \n
             'us', American Odds \n
