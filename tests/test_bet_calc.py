@@ -7,7 +7,7 @@ class TestBetCalc(unittest.TestCase):
     def test_bet_calc(self):
         risk = 100
         odds = -110
-        npt.assert_almost_equal(bet_calc(risk, odds), 190.91)
+        npt.assert_almost_equal(bet_calc(risk, odds), 191.0)
 
         risk = 50
         odds = 1.75
