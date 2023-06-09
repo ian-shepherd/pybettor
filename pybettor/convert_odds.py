@@ -1,3 +1,4 @@
+from typing import Union
 from fractions import Fraction
 from .implied_odds import implied_odds
 from .implied_prob import implied_prob
@@ -44,12 +45,14 @@ def _convert_frac_to_frac(odds):
     return frac
 
 
-def convert_odds(odds, cat_in="us", cat_out="all") -> list or dict:
+def convert_odds(
+    odds: Union[int, float, list], cat_in="us", cat_out="all"
+) -> list or dict:
     """Odds Converter
     This function converts any odds or probability.
 
     Args:
-        odds (float): Odds, or lines, for a given bet(s) (-115, -105)
+        odds (int, float, list): Odds, or lines, for a given bet(s) (-115, -105)
         cat_in (str, optional):  \n
             'us', American Odds \n
             'dec', Decimal Odds \n
