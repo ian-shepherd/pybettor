@@ -78,12 +78,12 @@ class TestImpliedOdds(unittest.TestCase):
         npt.assert_almost_equal(odds.get("exponent"), 0.97976215)
 
     def test_implied_power_odds_no_margin(self):
-        probs = [0.2311414, 0.2630644, 0.5057941]
+        probs = [0.2311414, 0.2630644, 0.5057942]
         margin = 0
         odds = implied_odds(probs, category="dec", margin=margin, method="power")
         npt.assert_almost_equal(
             odds.get("implied_odds"),
-            [4.32635564, 3.80135016, 1.97708889],
+            [4.32635607, 3.80135054, 1.97708870],
         )
         npt.assert_almost_equal(odds.get("exponent"), 1)
 

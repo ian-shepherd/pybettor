@@ -4,6 +4,36 @@ from scipy import optimize
 import numpy as np
 
 
+def _convert_dec_odds(odds, cat_out, prob):
+    if cat_out == "us":
+        new_odds = _convert_dec_to_us_odds(odds)
+    elif cat_out == "frac":
+        new_odds = _convert_dec_to_frac(odds)
+    elif cat_out == "dec":
+        new_odds = odds
+    elif cat_out == "all":
+        new_odds = {
+            "American": _convert_dec_to_us_odds(odds),
+            "Decimal": odds,
+            "Fraction": _convert_dec_to_frac(odds),
+            "Implied Probability": prob,
+        }
+
+    return new_odds
+
+
+def _convert_dec_to_us_odds(odds):
+    new_odds = [(x - 1) * 100 if x >= 2 else -100 / (x - 1) for x in odds]
+    new_odds = [round(x) for x in new_odds]
+    return new_odds
+
+
+def _convert_dec_to_frac(odds):
+    new_odds = [Fraction(x - 1).limit_denominator(100) for x in odds]
+    new_odds = [str(x.numerator) + "/" + str(x.denominator) for x in new_odds]
+    return new_odds
+
+
 def _implied_naive_odds(prob, category):
     if category == "all":
         us = [x / (1 - x) * -100 if x > 0.5 else (1 - x) / x * 100 for x in prob]
@@ -218,6 +248,10 @@ def implied_odds(
     assert gross_margin is None or (
         gross_margin >= 0 and gross_margin < 1
     ), "gross_margin must be None or between 0 and 1"
+    if len(prob) > 1 and method != "naive":
+        assert (
+            np.sum(prob) >= 1 - margin
+        ), "sum of probabilities must be greater than or equal to 1 - margin"
 
     if normalize:
         balanced_prob = [x / np.sum(prob) for x in prob]
@@ -231,6 +265,7 @@ def implied_odds(
         return imp_odds
     elif method == "basic":
         imp_odds = _implied_basic_odds(balanced_prob, margin)
+        imp_odds = _convert_dec_odds(imp_odds, category, prob)
         return imp_odds
     elif method == "wpo":
         imp_odds, specific_margins = _implied_wpo_odds(balanced_prob, margin)
@@ -243,6 +278,7 @@ def implied_odds(
         mydict["exponent"] = exponent
     elif method == "additive":
         imp_odds = _implied_additive_odds(balanced_prob, margin)
+        imp_odds = _convert_dec_odds(imp_odds, category, prob)
         return imp_odds
     elif method == "shin":
         imp_odds, z_value = _implied_shin_odds(balanced_prob, margin, gross_margin)
@@ -253,6 +289,7 @@ def implied_odds(
         )
         mydict["z_value"] = z_value
 
+    imp_odds = _convert_dec_odds(imp_odds, category, prob)
     mydict["implied_odds"] = imp_odds
 
     # sort dictionary
