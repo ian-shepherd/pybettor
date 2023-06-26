@@ -1,5 +1,11 @@
 # Change Log
 
+### 1.1.3 2023-06-09 Added new functionality to implied_odds() and implied_prob()
+* added functionality to pass various methods to account for margin of bookmaker
+
+### 1.1.2 2023-06-07 Added expected value function
+* added expected_value_calc() calculates the expected value of given odds based on implied probability
+
 ### 1.1.1 2023-05-29 Added unit tests and fixed bugs
 * Added unit tests for all functions
 * Reduced complexity of convert_odds()

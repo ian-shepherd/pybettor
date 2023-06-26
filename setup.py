@@ -1,6 +1,6 @@
 import setuptools
 
-VERSION = "1.1.2"
+VERSION = "1.1.3"
 DESCRIPTION = "automates simple bettor tasks"
 
 with open("README.md", "r") as fh:
