@@ -8,7 +8,7 @@ def fair_odds(
     """Calculates the fair offs for a bet.
 
     Args:
-        line (int or loat, optional): line of bet. Defaults to -110.
+        line (int or float, optional): line of bet. Defaults to -110.
         odds (list, optional): odds of all sides. Defaults to [-110, -110].
         category (str): type of odds. Defaults to "us". \n
             'us', American Odds \n
